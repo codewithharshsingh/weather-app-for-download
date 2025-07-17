@@ -3,7 +3,6 @@ function toggleDarkMode() {
 }
 
 function getWeather() {
-  const apiKey = 'e0291e4b2d2433ea115a0043fb292109'; // Replace with your real key
   const city = document.getElementById('city').value;
   const loader = document.getElementById('loader');
   const weatherIcon = document.getElementById('weather-icon');
@@ -20,7 +19,10 @@ function getWeather() {
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
   fetch(currentWeatherUrl)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) throw new Error("City not found.");
+      return response.json();
+    })
     .then(data => {
       document.getElementById('temp-div').innerHTML = `<p>${Math.round(data.main.temp)}°C</p>`;
       document.getElementById('weather-info').innerHTML = `<strong>${data.name}</strong><br>${data.weather[0].description}`;
@@ -35,7 +37,10 @@ function getWeather() {
     });
 
   fetch(forecastUrl)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) throw new Error("Forecast not found.");
+      return response.json();
+    })
     .then(data => {
       const hourlyDiv = document.getElementById('hourly-forecast');
       hourlyDiv.innerHTML = "";
