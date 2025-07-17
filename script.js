@@ -34,7 +34,7 @@ function getWeather() {
       const hourlyDiv = document.getElementById("hourly-forecast");
       hourlyDiv.innerHTML = "";
 
-      data.forecast.list.slice(0, 5).forEach((item) => {
+      data.forecast.list.slice(0, 24).forEach((item) => {
         const hour = new Date(item.dt_txt)
           .getHours()
           .toString()
