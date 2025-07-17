@@ -15,37 +15,26 @@ function getWeather() {
   loader.style.display = "block";
   weatherIcon.style.display = "none";
 
-  const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-  const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-
-  fetch(currentWeatherUrl)
+  // Call secure Netlify function
+  fetch(`/.netlify/functions/getWeather?city=${encodeURIComponent(city)}`)
     .then(response => {
       if (!response.ok) throw new Error("City not found.");
       return response.json();
     })
     .then(data => {
-      document.getElementById('temp-div').innerHTML = `<p>${Math.round(data.main.temp)}°C</p>`;
-      document.getElementById('weather-info').innerHTML = `<strong>${data.name}</strong><br>${data.weather[0].description}`;
-      weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
+      const weather = data.current;
+      const forecast = data.forecast;
+
+      document.getElementById('temp-div').innerHTML = `<p>${Math.round(weather.main.temp)}°C</p>`;
+      document.getElementById('weather-info').innerHTML = `<strong>${weather.name}</strong><br>${weather.weather[0].description}`;
+      weatherIcon.src = `https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
       weatherIcon.style.display = "block";
       loader.style.display = "none";
-    })
-    .catch(error => {
-      alert('Error fetching current weather.');
-      console.error(error);
-      loader.style.display = "none";
-    });
 
-  fetch(forecastUrl)
-    .then(response => {
-      if (!response.ok) throw new Error("Forecast not found.");
-      return response.json();
-    })
-    .then(data => {
       const hourlyDiv = document.getElementById('hourly-forecast');
       hourlyDiv.innerHTML = "";
 
-      data.list.slice(0, 5).forEach(item => {
+      forecast.list.slice(0, 5).forEach(item => {
         const hour = new Date(item.dt_txt).getHours().toString().padStart(2, "0");
         const temp = Math.round(item.main.temp);
         const icon = item.weather[0].icon;
@@ -61,7 +50,8 @@ function getWeather() {
       });
     })
     .catch(error => {
-      alert('Error fetching forecast.');
+      alert('Error fetching weather.');
       console.error(error);
+      loader.style.display = "none";
     });
 }
