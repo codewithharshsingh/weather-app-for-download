@@ -1,0 +1,23 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "A sleek weather app built with HTML, CSS, and JavaScript that displays current weather and a 24-hour forecast using the OpenWeatherMap API.",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codewithharshsingh/weather-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codewithharshsingh/weather-app/issues"
+  },
+  "homepage": "https://github.com/codewithharshsingh/weather-app#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
