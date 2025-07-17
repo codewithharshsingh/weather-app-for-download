@@ -1,13 +1,16 @@
 /* General body styles */
 body {
+  min-height: 100vh;
+  height: auto;
   background: #8c52ff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   margin: 0;
+  padding: 20px; /* Add space for small viewports */
   transition: background 0.5s ease;
+  overflow-y: auto;
 }
 
 .dark-mode {
