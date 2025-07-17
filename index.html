@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Dark mode toggle -->
+  <div class="toggle-container">
+    <label class="toggle-switch">
+      <input type="checkbox" onclick="toggleDarkMode()" />
+      <span class="slider"></span>
+      <p id="theme">Theme</p>
+    </label>
+  </div>
+
+  <div id="weather-container">
+    <h2>Weather App</h2>
+    <input type="text" id="city" placeholder="Enter city" />
+    <button onclick="getWeather()">Search</button>
+
+    <div id="loader"></div>
+
+    <img id="weather-icon" alt="Weather Icon" />
+    <div id="temp-div"></div>
+    <div id="weather-info"></div>
+    <div id="hourly-forecast"></div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
