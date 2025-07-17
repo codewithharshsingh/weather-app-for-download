@@ -1,3 +1,7 @@
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+}
+
 function getWeather() {
   const city = document.getElementById("city").value;
   const loader = document.getElementById("loader");
