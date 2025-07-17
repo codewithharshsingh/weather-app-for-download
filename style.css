@@ -291,3 +291,9 @@ input:checked + .slider:before {
     margin-top: 40px; /* ✅ Add space below Theme switch */
   }
 }
+
+@media (min-height: 720px) {
+  body {
+    padding: 0;
+  }
+}
