@@ -1,6 +1,6 @@
 # 🌦️ Weather App
 
-A sleek weather app built with HTML, CSS, and JavaScript that displays current weather and a 24-hour forecast using the OpenWeatherMap API.
+A sleek weather app built with HTML, CSS, and JavaScript that displays current weather and a forecast using the OpenWeatherMap API.
 
 ## 🔍 Features
 
