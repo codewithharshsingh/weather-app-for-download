@@ -1,21 +1,28 @@
+/* General body styles */
 body {
-  background: #8C52FF;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  height: auto;
+  background: #8c52ff;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   margin: 0;
+  padding: 20px; /* Add space for small viewports */
   transition: background 0.5s ease;
+  overflow-y: auto;
 }
 
 .dark-mode {
   background: #1e1e2f;
 }
 
+/* Main container */
 #weather-container {
+  position: relative;
   background: rgba(255, 255, 255, 0.3);
   max-width: 400px;
+  width: 100%;
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
@@ -23,6 +30,9 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: center;
   transition: background 0.5s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .dark-mode #weather-container {
@@ -33,11 +43,14 @@ body {
   font-weight: bold;
 }
 
-h2, label, p {
+h2,
+label,
+p {
   color: #fff;
   margin: 8px 0;
 }
 
+/* Input + Button */
 input {
   width: calc(100% - 16px);
   padding: 8px;
@@ -45,12 +58,11 @@ input {
   border-radius: 10px;
   border: 1px solid #fff;
   margin-top: 20px;
-  /* outline: none; */
-  outline-color: #8C52FF;
+  outline-color: #8c52ff;
 }
 
 button {
-  background: #8C52FF;
+  background: #8c52ff;
   color: #fff;
   padding: 10px;
   border: none;
@@ -67,31 +79,50 @@ button:hover {
   background: #8b48d7;
 }
 
+/* Temperature display */
 #temp-div p {
   font-size: 60px;
   margin-top: -30px;
+  color: #fff;
+  transition: 1s ease;
 }
 
+.dark-mode #temp-div p {
+  color: #8c52ff;
+}
+
+/* Weather info */
 #weather-info {
   font-size: 20px;
   color: #fff;
 }
 
+/* Weather icon */
 #weather-icon {
   width: 200px;
   height: 200px;
-  margin: 0 auto 10px;
+  margin: 0 auto 0;
   display: none;
 }
 
+@media (max-width: 450px) {
+  #weather-icon {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Hourly forecast section */
 #hourly-forecast {
-  margin-top: 24px;
+  margin-top: 16px;
   overflow-x: auto;
   white-space: nowrap;
   display: flex;
   justify-content: space-between;
   scroll-behavior: smooth;
   scrollbar-width: thin;
+  padding: 12px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   scrollbar-color: #a977ff rgba(255, 255, 255, 0.1);
 }
 
@@ -118,7 +149,8 @@ button:hover {
 }
 
 @keyframes scroll-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.7;
     transform: scaleY(1);
   }
@@ -128,9 +160,10 @@ button:hover {
   }
 }
 
+/* Hourly item styling */
 .hourly-item {
   flex: 0 0 auto;
-  width: 80px;
+  width: 70px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,6 +178,12 @@ button:hover {
   margin-bottom: 5px;
 }
 
+.hourly-item p {
+  font-size: 12px;
+  margin: 2px 0;
+}
+
+/* Loader spinner */
 #loader {
   display: none;
   margin: 20px auto;
@@ -157,15 +196,20 @@ button:hover {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-/* Dark mode toggle switch */
+/* Toggle switch */
 .toggle-container {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
 }
 
 .toggle-switch {
@@ -206,20 +250,43 @@ button:hover {
 }
 
 input:checked + .slider {
-  background-color: #8C52FF;
+  background-color: #8c52ff;
 }
 
 input:checked + .slider:before {
   transform: translateX(24px);
 }
 
+/* Mobile-friendly tweaks */
+@media (max-width: 480px) {
+  #weather-container {
+    padding: 16px;
+    margin: 10px;
+  }
 
-.dark-mode #temp-div p{
-  color: #8C52FF;
-  transition: 1s ease;
+  h2 {
+    font-size: 20px;
+  }
+
+  #temp-div p {
+    font-size: 48px;
+  }
+
+  #weather-info {
+    font-size: 16px;
+  }
+
+  .hourly-item {
+    width: 60px;
+  }
+
+  .hourly-item p {
+    font-size: 11px;
+  }
 }
 
-#temp-div p{
-  color: #fff;
-  transition: 1s ease;
+@media (max-width: 400px) {
+  #weather-container {
+    margin-top: 40px; /* ✅ Add space below Theme switch */
+  }
 }

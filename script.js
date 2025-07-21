@@ -3,12 +3,13 @@ function toggleDarkMode() {
 }
 
 function getWeather() {
-  const city = document.getElementById('city').value;
-  const loader = document.getElementById('loader');
-  const weatherIcon = document.getElementById('weather-icon');
+  const apiKey = "YOUR_OPENWEATHER_API_KEY_HERE"; // Replace with your real key
+  const city = document.getElementById("city").value;
+  const loader = document.getElementById("loader");
+  const weatherIcon = document.getElementById("weather-icon");
 
   if (!city) {
-    alert('Please enter a city');
+    alert("Please enter a city");
     return;
   }
 
@@ -19,34 +20,35 @@ function getWeather() {
   const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
   fetch(currentWeatherUrl)
-    .then(response => {
-      if (!response.ok) throw new Error("City not found.");
-      return response.json();
-    })
-    .then(data => {
-      document.getElementById('temp-div').innerHTML = `<p>${Math.round(data.main.temp)}°C</p>`;
-      document.getElementById('weather-info').innerHTML = `<strong>${data.name}</strong><br>${data.weather[0].description}`;
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("temp-div").innerHTML = `<p>${Math.round(
+        data.main.temp
+      )}°C</p>`;
+      document.getElementById(
+        "weather-info"
+      ).innerHTML = `<strong>${data.name}</strong><br>${data.weather[0].description}`;
       weatherIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`;
       weatherIcon.style.display = "block";
       loader.style.display = "none";
     })
-    .catch(error => {
-      alert('Error fetching current weather.');
+    .catch((error) => {
+      alert("Error fetching current weather.");
       console.error(error);
       loader.style.display = "none";
     });
 
   fetch(forecastUrl)
-    .then(response => {
-      if (!response.ok) throw new Error("Forecast not found.");
-      return response.json();
-    })
-    .then(data => {
-      const hourlyDiv = document.getElementById('hourly-forecast');
+    .then((response) => response.json())
+    .then((data) => {
+      const hourlyDiv = document.getElementById("hourly-forecast");
       hourlyDiv.innerHTML = "";
 
-      data.list.slice(0, 5).forEach(item => {
-        const hour = new Date(item.dt_txt).getHours().toString().padStart(2, "0");
+      data.list.slice(0, 24).forEach((item) => {
+        const hour = new Date(item.dt_txt)
+          .getHours()
+          .toString()
+          .padStart(2, "0");
         const temp = Math.round(item.main.temp);
         const icon = item.weather[0].icon;
 
@@ -60,8 +62,8 @@ function getWeather() {
         hourlyDiv.innerHTML += itemHTML;
       });
     })
-    .catch(error => {
-      alert('Error fetching forecast.');
+    .catch((error) => {
+      alert("Error fetching forecast.");
       console.error(error);
     });
 }

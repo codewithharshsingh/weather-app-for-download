@@ -1,12 +1,13 @@
-# 🌦️ Weather App
+# WeatherApplication
 
-A sleek weather app built with HTML, CSS, and JavaScript that displays current weather and a 24-hour forecast using the OpenWeatherMap API.
+A simple weather application using the openweather API.
 
-## 🔍 Features
+STEPS TO RUN THE CODE:
 
-- Current weather (temperature, condition, icon)
-- 24-hour hourly forecast
-- Dark mode toggle
-- Smooth UI with animated scrollbar
-- Responsive design
-- API-key protected version for production use
+1. Go to https://openweathermap.org
+2. Create a free account
+3. Navigate to the API keys section
+4. Generate a key
+5. Copy that key to clipboard
+6. Insert that key into the required variable in the script.js file
+7. Enjoy!
